@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+<!-- Bootstrap Core CSS -->
+<link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<!-- DataTables CSS -->
+<link
+	href="./bootstrap/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
+	rel="stylesheet">
+<!-- DataTables Responsive CSS -->
+<link
+	href="./bootstrap/bower_components/datatables-responsive/css/dataTables.responsive.css"
+	rel="stylesheet">
+<!-- MetisMenu CSS -->
+<link
+	href="./bootstrap/bower_components/metisMenu/dist/metisMenu.min.css"
+	rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="./bootstrap/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+
+	<div ng-app="" ng-controller="customersController">
+		
+		<div class="row">
+			<div class="col-md-2">
+				<ul class="nav" id="side-menu">
+					<li><h2>Hello World!</h2></li>
+					<li><a href="index.html">
+							<h3><span class="glyphicon glyphicon-user"></span>Member Center</h3></a></li>
+					<li><a href="index.html">
+						<h3>All Categories</h3></a></li>
+					<li>
+						<a href="#"><i class="fa fa-wrench fa-fw"></i> 數位<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+                            <li>
+                                <a href="index.html?RGNO=11">手機/平板/配件</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=12">藍芽/耳機</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=13">電玩</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-wrench fa-fw"></i> 家電<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+                            <li>
+                                <a href="index.html?RGNO=21">美容/按摩</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=22">電視/音響</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=23">清淨除濕</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=24">淨/飲水/咖啡機</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=25">暖氣/電風扇</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=26">廚房家電</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-wrench fa-fw"></i> 家電<span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+                            <li>
+                                <a href="index.html?RGNO=21">美容/按摩</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=22">電視/音響</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=23">清淨除濕</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=24">淨/飲水/咖啡機</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=25">暖氣/電風扇</a>
+                            </li>
+                            <li>
+                                <a href="index.html?RGNO=26">廚房家電</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+					</li>
+				</ul>
+			</div>
+			
+			<div class="col-md-10">
+			<h1 class="page-header">Merchandise Information</h1>
+			<table class="table table-striped table-bordered table-hover"
+				id="dataTables-example">
+				<thead>
+					<tr>
+						<th>Picture</th>
+						<th>Name</th>
+						<th>Detail</th>
+						<th>Account</th>
+						<th>Date</th>
+						<th>Days</th>
+						<th>Money</th>
+						<th>Category</th>
+						<th>Category</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="x in names">
+						<td><img src="./pic/{{ x.pic }}" width="150" height="150"
+							alt="Picture Information" /></td>
+						<td>{{ x.name }}</td>
+						<td><a href="MerchandiseInfo.html?id={{ x.id }}"
+							class="btn btn-lg btn-info" ng-click="lookMoreInfo()"> <span
+								class="glyphicon glyphicon-search"></span> Look for more
+								detail....
+						</a></td>
+						<td>{{ x.account }}</td>
+						<td>{{ x.date }}</td>
+						<td>{{ x.days }}</td>
+						<td>{{ x.money }}</td>
+						<td>{{ x.bclass }}</td>
+						<td>{{ x.sclass }}</td>
+					</tr>
+
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="./bootstrap/bower_components/jquery/dist/jquery.min.js"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="./bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Metis Menu Plugin JavaScript -->
+	<script
+		src="./bootstrap/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+	<!-- DataTables JavaScript -->
+	<script
+		src="./bootstrap/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script
+		src="./bootstrap/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+	<script>
+		function customersController($scope, $http) {
+			$http.get("http://140.118.109.39:8080/jsp/ItemSearchServlet")
+					.success(function(response) {
+						$scope.names = response;
+						//$('#dataTables-example').DataTable({
+						//    responsive: true
+						//});
+					});
+			$scope.lookMoreInfo = function() {
+				//alert('test');
+				//scope.$apply(function() { $location.path("/route"); });
+			}
+			//	angular.module('datatablesSampleApp', ['ngResource', 'datatables']).controller('AngularWayCtrl', AngularWayCtrl);
+			//	function AngularWayCtrl($resource) {
+			//	    var vm = this;
+			//	    $http.get("http://140.118.109.39:8080/jsp/ItemSearchServlet")
+			//	  	.success(function(response) {
+			//		  	$vm.names = response;
+
+			//		  });
+			//	}
+		}
+
+		$(document).ready(function() {
+
+		});
+	</script>
+
+</body>
+</html>
